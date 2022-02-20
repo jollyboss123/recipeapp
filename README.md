@@ -11,3 +11,5 @@ Bugs:
 Ideas:
 1. add gesture detection for bottomsheetfragment in createnewrecipe page
 2. better animation transition when changing in between categories in home fragment
+3. allow adding image when creating new cuisine type
+4. make numbering for ingredients and instructions in createnewrecipe page

@@ -16,14 +16,8 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="translucent">#1A000000</color>
+    <color name="pastel_orange">#FFFBE8DF</color>
 
-    <!-- note color -->
-    <color name="defaultNote">#FF606570</color>
-    <color name="blueNote">#FF4E33FF</color>
-    <color name="yellowNote">#FFFFD633</color>
-    <color name="whiteNote">#FFFFFFFF</color>
-    <color name="purpleNote">#FFAE3B76</color>
-    <color name="greenNote">#FF0AEBAF</color>
-    <color name="orangeNote">#FFFF7746</color>
-    <color name="blackNote">#FF202734</color>
 </resources>

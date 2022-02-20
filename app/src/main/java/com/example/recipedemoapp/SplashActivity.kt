@@ -2,26 +2,16 @@ package com.example.recipedemoapp
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.example.recipedemoapp.database.RecipeDatabase
 import com.example.recipedemoapp.databinding.ActivitySplashBinding
 import com.example.recipedemoapp.entities.Category
-import com.example.recipedemoapp.interfaces.GetDataService
-import com.example.recipedemoapp.retrofitclient.RetrofitClientInstance
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Delay
 import kotlinx.coroutines.launch
-import pub.devrel.easypermissions.EasyPermissions
-import retrofit2.Call
-import retrofit2.Response
 import java.io.IOException
 
 class SplashActivity : BaseActivity() {
@@ -36,8 +26,15 @@ class SplashActivity : BaseActivity() {
 
         setContentView(R.layout.activity_splash)
 
-        clearDatabase()
-        insertDataIntoRoomDb(getRecipeTypes(applicationContext))
+        // only insert dummy data if there is no existing category
+        launch {
+            this.let {
+                if (RecipeDatabase.getDatabase(this@SplashActivity).recipeDao().getAllCategory().isNullOrEmpty()){
+                    clearDatabase()
+                    insertDataIntoRoomDb(getRecipeTypes(applicationContext))
+                }
+            }
+        }
 
         withHandlerRunnable(3_000L)
 

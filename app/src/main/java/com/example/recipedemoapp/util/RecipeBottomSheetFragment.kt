@@ -16,14 +16,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class RecipeBottomSheetFragment : BottomSheetDialogFragment() {
 
-
     companion object{
-        var noteId = -1
+        var recipeId = -1
         fun newInstance(id: Int): RecipeBottomSheetFragment{
             val args = Bundle()
             val fragment = RecipeBottomSheetFragment()
             fragment.arguments = args
-            noteId = id
+            recipeId = id
             return fragment
         }
     }
@@ -85,10 +84,14 @@ class RecipeBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (noteId != -1) {
-            _binding!!.layoutDeleteNote.visibility = View.VISIBLE
+        if (recipeId != -1) {
+            _binding!!.layoutDeleteRecipe.visibility = View.VISIBLE
+            _binding!!.layoutUpdateRecipe.visibility = View.VISIBLE
+            _binding!!.layoutImage.visibility = View.GONE
         } else {
-            _binding!!.layoutDeleteNote.visibility = View.GONE
+            _binding!!.layoutDeleteRecipe.visibility = View.GONE
+            _binding!!.layoutUpdateRecipe.visibility = View.GONE
+            _binding!!.layoutImage.visibility = View.VISIBLE
         }
         setListener()
     }
@@ -102,16 +105,16 @@ class RecipeBottomSheetFragment : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        _binding!!.layoutWebUrl.setOnClickListener{
+        _binding!!.layoutUpdateRecipe.setOnClickListener{
             val intent = Intent("bottom_sheet_action")
-            intent.putExtra("action", "WebUrl")
+            intent.putExtra("action", "UpdateRecipe")
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }
 
-        _binding!!.layoutDeleteNote.setOnClickListener{
+        _binding!!.layoutDeleteRecipe.setOnClickListener{
             val intent = Intent("bottom_sheet_action")
-            intent.putExtra("action", "DeleteNote")
+            intent.putExtra("action", "DeleteRecipe")
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }

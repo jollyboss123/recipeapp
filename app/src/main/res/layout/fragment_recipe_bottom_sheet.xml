@@ -63,7 +63,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutWebUrl"
+        android:id="@+id/layout_update_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,6 +72,7 @@
         android:background="@color/yellow"
         android:orientation="horizontal"
         android:gravity="center"
+        android:visibility="gone"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp">
@@ -79,7 +80,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_link"
+            android:src="@drawable/ic_baseline_edit_24"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             app:tint="@color/white" />
@@ -91,7 +92,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white"
-            android:text="Add Web Link"
+            android:text="Update Recipe"
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="@dimen/_12ssp"
@@ -101,7 +102,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutDeleteNote"
+        android:id="@+id/layout_delete_recipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,7 +131,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/white"
-            android:text="Delete Note"
+            android:text="Delete Recipe"
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="@dimen/_12ssp"

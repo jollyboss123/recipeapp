@@ -1,52 +1,59 @@
 package com.example.recipedemoapp.adapter
 
-import android.app.Activity
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.recipedemoapp.R
+import com.example.recipedemoapp.databinding.ItemRvRecipetypeBinding
 import com.example.recipedemoapp.entities.Category
-import java.lang.Exception
+import com.example.recipedemoapp.util.GlideApp
 
-class RecipeTypeAdapter(
-    private val mContext: Context,
-    private val mLayoutResourceId: Int,
-    recipeTypes: List<Category>
-):
-    ArrayAdapter<Category>(mContext, mLayoutResourceId, recipeTypes) {
+class RecipeTypeAdapter():
+    RecyclerView.Adapter<RecipeTypeAdapter.RecipesViewHolder>() {
 
     var arrList = ArrayList<Category>()
+    var listener: OnItemClickListener? = null
     var ctx: Context? = null
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        var convertView = convertView
-        if (convertView == null) {
-            val inflater = (mContext as Activity).layoutInflater
-            convertView = inflater.inflate(mLayoutResourceId, parent, false)
+    class RecipesViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        val binding = ItemRvRecipetypeBinding.bind(view)
+    }
+
+    fun setData(arrRecipeList: List<Category>){
+        arrList = arrRecipeList as ArrayList<Category>
+    }
+
+    fun setOnClickListener(listener1:OnItemClickListener){
+        listener = listener1
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesViewHolder {
+        ctx = parent.context
+        return RecipesViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_rv_recipetype, parent, false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
+        with(holder){
+            binding.tvRecipeType.text = arrList[position].strcategory
+
+            if (arrList[position].strcategorythumb != ""){
+                GlideApp.with(ctx!!).load(arrList[position].strcategorythumb).into(binding.imgDish)
+            }
+            binding.root.setOnClickListener {
+                listener!!.onClicked(arrList[position].strcategory!!)
+            }
         }
-        try {
-            val category:Category = getItem(position)!!
-            val categoryAutoCompleteView = convertView!!.findViewById<View>(R.id.item_dropdownlist) as TextView
-            categoryAutoCompleteView.text = category.strcategory
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return convertView!!
     }
 
-    override fun getItem(position: Int): Category? {
-        return arrList[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return arrList[position].id.toLong()
-    }
-
-
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return arrList.size
     }
 
+    interface OnItemClickListener{
+        fun onClicked(cat: String)
+    }
 }

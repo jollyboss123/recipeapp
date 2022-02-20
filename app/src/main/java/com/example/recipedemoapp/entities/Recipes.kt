@@ -6,13 +6,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(tableName = "Notes")
+@Entity(tableName = "Recipes")
 class Recipes: Serializable{
     @PrimaryKey(autoGenerate = true)
     var id : Int? = null
 
     @ColumnInfo(name = "recipeType")
-    val recipetype: String? = null
+    var recipetype: String? = null
 
     @ColumnInfo(name = "recipeName")
     var recipename: String? = null

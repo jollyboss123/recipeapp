@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.26875" />
         <entry key="../NotesApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19" />
         <entry key="../NotesApp/app/src/main/res/drawable/ic_delete.xml" value="0.19" />
         <entry key="../NotesApp/app/src/main/res/drawable/ic_image.xml" value="0.19" />
         <entry key="../NotesApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/background.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/btn_bg.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/btn_bg2.xml" value="0.1815" />
+        <entry key="app/src/main/res/drawable/dropdown_bg.xml" value="0.1815" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.19" />
@@ -16,18 +19,25 @@
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/ic_link.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/ic_recipetype.xml" value="0.1815" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.19" />
+        <entry key="app/src/main/res/drawable/text_background.xml" value="0.1815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15217391304347827" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_create_note.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_create_recipe.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_dropdown_list.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_create_recipe_2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_create_recipe_3.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_dropdown_list.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_notes_bottom_sheet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_recipe_bottom_sheet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/item_dd_recipe_type.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/item_dd_recipe_type2.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/item_rv_notes.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/item_rv_recipe.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/item_rv_recipe.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_rv_recipeType.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_rv_recipetype.xml" value="0.33" />
       </map>
     </option>
   </component>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,57 +7,80 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv1"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20ssp"
-        android:text="@string/recipes"
-        android:textColor="@color/black"
-        android:fontFamily="@font/manrope_bold"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingTop="@dimen/_10sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:scrollbars="none">
 
-    <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/background"
-        android:searchIcon="@drawable/ic_search"
-        android:queryHint="@string/search"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        android:iconifiedByDefault="false"
-        android:theme="@style/ThemeOverlay.search"
-        app:layout_constraintTop_toBottomOf="@+id/tv1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/search_view"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_view" />
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background"
+            android:searchIcon="@drawable/ic_search"
+            android:queryHint="@string/search"
+            android:queryBackground="@color/transparent"
+            android:iconifiedByDefault="true"
+            android:theme="@style/ThemeOverlay.search"
+            android:id="@+id/search_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_recipeTypes"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="horizontal"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_rv_recipetype"/>
+
+        <TextView
+            android:id="@+id/tvRecipeType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20ssp"
+            android:text="@string/recipes"
+            android:textColor="@color/black"
+            android:fontFamily="@font/manrope_bold"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_rv_recipe"
+            app:layout_constraintTop_toBottomOf="@+id/search_view" />
+    </LinearLayout>
+    </ScrollView>
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
-        android:background="@color/colorAccent"
+        android:backgroundTint="@color/primary"
         app:tint="@color/white"
         android:id="@+id/fabBtnCreateNote"
         android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

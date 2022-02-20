@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NotesApp</string>
+    <string name="app_name">RecipeApp</string>
     <string name="recipes">My Recipes</string>
     <string name="recipe_name">Recipe Name</string>
     <string name="ingredients">Ingredients</string>
@@ -12,11 +12,9 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="https">https://</string>
-    <string-array name="feelings">
-        <item>Sad</item>
-        <item>Dissatisfied</item>
-        <item>Satisfied</item>
-        <item>Happy</item>
-        <item>Excited</item>
-    </string-array>
+    <string name="instructions">Instructions</string>
+    <string name="list_instructions_here">List instructions here</string>
+    <string name="list_ingredients_here">List ingredients here</string>
+    <string name="insert_recipe_type">Insert Recipe type here</string>
+    <string name="pick_recipe_type">Pick recipe type</string>
 </resources>

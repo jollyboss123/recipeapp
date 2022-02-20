@@ -4,24 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import com.example.recipedemoapp.adapter.RecipeAdapter
-import com.example.recipedemoapp.adapter.RecipeTypeAdapter
+import com.example.recipedemoapp.adapter.RecipeTypeDropdownAdapter
 import com.example.recipedemoapp.database.RecipeDatabase
 import com.example.recipedemoapp.databinding.FragmentDropdownListBinding
-import com.example.recipedemoapp.entities.Category
 import kotlinx.coroutines.launch
 
 class DropDownListFragment : BaseFragment(){
 
-    var arrCategory = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
         }
+        // to close app on back pressed event
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (shouldInterceptBackPress()) {
+                    activity?.finish()
+                } else {
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
+            }
+        })
+    }
 
+    private fun shouldInterceptBackPress(): Boolean {
+        return true
     }
 
     override fun onResume() {
@@ -29,15 +41,18 @@ class DropDownListFragment : BaseFragment(){
         launch {
             context?.let {
                 var recipeTypes = RecipeDatabase.getDatabase(it).recipeDao().getAllCategory()
-                for (arr in recipeTypes) {
-                    arrCategory.add(arr.strcategory)
-                }
-
-                val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dd_recipe_type, arrCategory)
-                //var arrayAdapter = RecipeTypeAdapter(requireContext(),R.layout.item_dd_recipe_type, recipeTypes)
+                val arrayAdapter = RecipeTypeDropdownAdapter(requireContext(), R.layout.item_dd_recipe_type, recipeTypes)
                 binding.autoCompleteTextView.setAdapter(arrayAdapter)
-                binding.autoCompleteTextView.setOnItemClickListener()
-
+                binding.autoCompleteTextView.setOnItemClickListener { _, _, position, _ ->
+                    val recipes = arrayAdapter.getItem(position)
+                    binding.autoCompleteTextView.setText(recipes?.strcategory)
+                    var fragment : Fragment
+                    var bundle = Bundle()
+                    bundle.putString("recipeType", recipes?.strcategory)
+                    fragment = HomeFragment.newInstance()
+                    fragment.arguments = bundle
+                    replaceFragment(fragment, false)
+                }
             }
         }
     }

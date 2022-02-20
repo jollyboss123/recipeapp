@@ -25,7 +25,7 @@ abstract class RecipeDatabase: RoomDatabase() {
                 recipeDatabase = Room.databaseBuilder(
                     context,
                     RecipeDatabase::class.java,
-                    "notes.db"
+                    "recipes.db"
                 ).build()
             }
             return recipeDatabase!!

@@ -10,16 +10,19 @@ interface RecipeDao {
     @Query("SELECT * FROM recipetypes ORDER BY id DESC")
     suspend fun getAllCategory(): List<Category>
 
-    @Query("SELECT * FROM notes ORDER BY id DESC")
-    suspend fun getAllNotes(): List<Recipes>
+    @Query("SELECT * FROM recipes ORDER BY id DESC")
+    suspend fun getAllRecipes(): List<Recipes>
 
     @Query("DELETE FROM recipetypes")
     suspend fun clearDb()
 
-    @Query("SELECT * from notes WHERE recipeType = :recipeType ORDER BY id DESC")
+    @Query("SELECT * from recipes WHERE recipeType = :recipeType ORDER BY id DESC")
     suspend fun getSpecificRecipeList(recipeType: String): List<Recipes>
 
-    @Query("SELECT * FROM notes WHERE id = :id")
+    @Query("SELECT strcategory from recipetypes ORDER BY id DESC")
+    suspend fun getAllCategoryName(): List<String>
+
+    @Query("SELECT * FROM recipes WHERE id = :id")
     suspend fun getSpecificRecipe(id:Int): Recipes
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,10 +31,7 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipes(recipe: Recipes)
 
-    @Delete
-    suspend fun deleteRecipe(recipes:Recipes)
-
-    @Query("DELETE FROM notes WHERE id = :id")
+    @Query("DELETE FROM recipes WHERE id = :id")
     suspend fun deleteSpecificRecipe(id:Int)
 
     @Update

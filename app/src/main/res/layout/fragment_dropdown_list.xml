@@ -7,29 +7,46 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:src="@drawable/dropdownbg"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/yellow"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:hint="Pick recipe type"
+        android:hint="@string/pick_recipe_type"
+        app:hintTextColor="@color/pastel_orange"
+        android:textColorHint="@color/pastel_orange"
+        app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+        app:boxCornerRadiusTopStart="@dimen/_10sdp"
         app:startIconDrawable="@drawable/ic_recipetype"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:startIconTint="@color/pastel_orange"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:endIconTint="@color/pastel_orange">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/yellow"
             android:inputType="none"
-            tools:text="All" />
+            android:textColor="@color/pastel_orange"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

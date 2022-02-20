@@ -5,27 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.bumptech.glide.module.AppGlideModule
 import com.example.recipedemoapp.adapter.RecipeAdapter
+import com.example.recipedemoapp.adapter.RecipeTypeAdapter
 import com.example.recipedemoapp.database.RecipeDatabase
 import com.example.recipedemoapp.databinding.FragmentHomeBinding
+import com.example.recipedemoapp.entities.Category
 import com.example.recipedemoapp.entities.Recipes
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : BaseFragment() {
-    var recipeAdapter: RecipeAdapter = RecipeAdapter()
-    var arrRecipe = ArrayList<Recipes>()
+    private var recipeAdapter: RecipeAdapter = RecipeAdapter()
+    private var recipeTypeAdapter: RecipeTypeAdapter = RecipeTypeAdapter()
+    private var arrRecipe = ArrayList<Recipes>()
+    private var arrRecipeType = ArrayList<Category>()
+    private var recipeType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
+            recipeType = requireArguments().getString("recipeType", null)
+            recipeTypeAdapter.setOnClickListener(onClicked)
+
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        getRecipeDataFromDb(recipeType)
+    }
+
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -53,16 +68,28 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        _binding!!.recyclerView.setHasFixedSize(true)
+        _binding!!.rvRecipeTypes.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        _binding!!.tvRecipeType.text = recipeType
+
+//        _binding!!.recyclerView.setHasFixedSize(true)
+
+//        _binding!!.recyclerView.layoutManager =
+//            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         _binding!!.recyclerView.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         launch {
             context?.let {
-                var recipes = RecipeDatabase.getDatabase(it).recipeDao().getAllNotes()
+                var recipeTypes = RecipeDatabase.getDatabase(it).recipeDao().getAllCategory()
+                var recipes = RecipeDatabase.getDatabase(it).recipeDao().getSpecificRecipeList(recipeType)
 
                 // get data from db and add it to adapter using setData()
+                arrRecipeType = recipeTypes as ArrayList<Category>
+                arrRecipeType.reverse()
+                recipeTypeAdapter.setData(arrRecipeType)
+                _binding!!.rvRecipeTypes.adapter = recipeTypeAdapter
                 recipeAdapter!!.setData(recipes)
                 _binding!!.recyclerView.adapter = recipeAdapter
 
@@ -71,10 +98,15 @@ class HomeFragment : BaseFragment() {
             }
         }
 
-        recipeAdapter!!.setOnClickListener(onClicked)
+        recipeAdapter!!.setOnClickListener(onClickedRecipe)
 
         _binding!!.fabBtnCreateNote.setOnClickListener {
             replaceFragment(CreateRecipeFragment.newInstance(), false)
+        }
+
+        // to make whole search bar clickable even when iconifiedbydefault is true
+        _binding!!.searchView.setOnClickListener {
+            _binding!!.searchView.onActionViewExpanded()
         }
 
         _binding!!.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -102,12 +134,34 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    private val onClicked = object : RecipeAdapter.OnItemClickListener{
-        override fun onClicked(recipesId: Int) {
+    private fun getRecipeDataFromDb(recipeType: String) {
+        _binding!!.tvRecipeType.text = recipeType
+        launch {
+            context?.let {
+                var recipes = RecipeDatabase.getDatabase(it).recipeDao().getSpecificRecipeList(recipeType)
 
-            var fragment : Fragment
-            var bundle = Bundle()
-            bundle.putInt("recipeId", recipesId)
+                // get data from db and add it to adapter using setData()
+                recipeAdapter!!.setData(recipes)
+                _binding!!.recyclerView.adapter = recipeAdapter
+
+                arrRecipe = recipes as ArrayList<Recipes>
+            }
+        }
+    }
+
+    private val onClicked = object : RecipeTypeAdapter.OnItemClickListener{
+        override fun onClicked(cat: String) {
+            recipeType = cat
+            getRecipeDataFromDb(recipeType)
+        }
+    }
+
+    private val onClickedRecipe = object : RecipeAdapter.OnItemClickListener{
+        override fun onClicked(recipeId: Int) {
+
+            val fragment : Fragment
+            val bundle = Bundle()
+            bundle.putInt("recipeId", recipeId)
             fragment = CreateRecipeFragment.newInstance()
             fragment.arguments = bundle
             replaceFragment(fragment, false)
@@ -122,4 +176,5 @@ class HomeFragment : BaseFragment() {
         }
         fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }
+
 }

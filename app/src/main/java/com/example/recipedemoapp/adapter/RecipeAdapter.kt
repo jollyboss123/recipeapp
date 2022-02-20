@@ -42,29 +42,9 @@ class RecipeAdapter():
     override fun onBindViewHolder(holder: RecipesViewHolder, position: Int) {
         with(holder){
             binding.tvTitle.text = arrList[position].recipename
-            binding.tvDesc.text = arrList[position].recipesteps
-            binding.tvDateTime.text = arrList[position].datetime
-
-//            if (arrList[position].color != null) {
-//                binding.cardView.setCardBackgroundColor(Color.parseColor(arrList[position].color))
-//            } else {
-//                binding.cardView.setCardBackgroundColor(Color.parseColor(R.color.lightBlack.toString()))
-//            }
 
             if (arrList[position].imgpath != ""){
-//                var bitmap = BitmapFactory.decodeFile(arrList[position].imgpath)
-//                binding.imgNote.setImageBitmap(bitmap)
                 GlideApp.with(ctx!!).load(arrList[position].imgpath).into(binding.imgRecipe)
-                binding.imgRecipe.visibility = View.VISIBLE
-            } else {
-                binding.imgRecipe.visibility = View.GONE
-            }
-
-            if (arrList[position].weblink != ""){
-                binding.tvWebLink.text = arrList[position].weblink
-                binding.tvWebLink.visibility = View.VISIBLE
-            } else {
-                binding.tvWebLink.visibility = View.GONE
             }
 
             binding.cardView.setOnClickListener {
@@ -78,6 +58,6 @@ class RecipeAdapter():
     }
 
     interface OnItemClickListener{
-        fun onClicked(noteId:Int)
+        fun onClicked(recipeId:Int)
     }
 }

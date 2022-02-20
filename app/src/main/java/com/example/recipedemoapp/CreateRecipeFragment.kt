@@ -248,8 +248,6 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
         launch {
             context?.let {
                 RecipeDatabase.getDatabase(it).recipeDao().insertCategory(category)
-                var recipeTypes = RecipeDatabase.getDatabase(it).recipeDao().getAllCategory()
-                recipeTypes.forEach(System.out::println)
             }
         }
     }

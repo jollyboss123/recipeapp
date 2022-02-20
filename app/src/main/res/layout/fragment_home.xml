@@ -73,6 +73,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         android:backgroundTint="@color/primary"
+        app:backgroundTint="@color/primary"
         app:tint="@color/white"
         android:id="@+id/fabBtnCreateNote"
         android:layout_marginEnd="@dimen/_20sdp"

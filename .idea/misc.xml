@@ -29,7 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_create_recipe_2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_create_recipe_3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dropdown_list.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_notes_bottom_sheet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_recipe_bottom_sheet.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/item_dd_recipe_type.xml" value="0.19610507246376813" />

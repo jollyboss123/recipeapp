@@ -13,3 +13,4 @@ Ideas:
 2. better animation transition when changing in between categories in home fragment
 3. allow adding image when creating new cuisine type
 4. make numbering for ingredients and instructions in createnewrecipe page
+5. allow user to note down calories, length of time and number of persons per recipe

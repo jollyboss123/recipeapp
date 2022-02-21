@@ -174,7 +174,7 @@ class HomeFragment : BaseFragment() {
         val fragmentTransition = requireActivity().supportFragmentManager.beginTransaction()
 
         if (istransition){
-            fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+            fragmentTransition.setCustomAnimations(0, android.R.anim.slide_out_right)
         }
         fragmentTransition.replace(R.id.frame_layout, fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }

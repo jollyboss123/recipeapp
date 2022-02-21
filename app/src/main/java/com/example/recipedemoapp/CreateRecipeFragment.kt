@@ -7,6 +7,7 @@ import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +17,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.recipedemoapp.adapter.RecipeTypeDropdownAdapter
 import com.example.recipedemoapp.database.RecipeDatabase
 import com.example.recipedemoapp.databinding.FragmentCreateRecipeBinding
-import com.example.recipedemoapp.databinding.FragmentRecipeBottomSheetBinding
 import com.example.recipedemoapp.entities.Category
 import com.example.recipedemoapp.entities.Recipes
 import com.example.recipedemoapp.util.GlideApp
@@ -183,9 +183,9 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
                 var newRecipeType = _binding!!.recipeType.text.toString()
                 val positiveButtonClick = { dialog: DialogInterface, which: Int ->
                     insertNewRecipeTypeIntoRoomDb(newRecipeType)
+                    saveRecipeAfterCreateNewRecipeType()
                     Toast.makeText(requireContext(), "New recipe type: ${newRecipeType.capitalize()} created",
                         Toast.LENGTH_SHORT).show()
-                    saveRecipeAfterCreateNewRecipeType()
                 }
                 val negativeButtonClick = { dialog: DialogInterface, which: Int ->
                     dialog.cancel()

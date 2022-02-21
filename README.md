@@ -16,3 +16,4 @@ Ideas:
 5. allow user to note down calories, length of time and number of persons per recipe
 6. customise alert box for create new cuisine type
 7. add lottie as custom progress bar and loader
+8. allow deleting cuisine type on long hold

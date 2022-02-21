@@ -33,6 +33,7 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
     private var recipeId = -1
     private var selectedImageUri: Uri? = null
     private var recipeTypesList: List<String>? = null
+    private var noteBottomSheetFragment: RecipeBottomSheetFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +67,7 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // in the instance of viewing recipes created
         if (recipeId != -1){
             launch {
                 context?.let {
@@ -91,6 +93,7 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
             }
         }
 
+        // suggest existing recipe types when user input recipe type in creating new recipe
         launch {
             context?.let {
                 var recipeTypes = RecipeDatabase.getDatabase(it).recipeDao().getAllCategory()
@@ -128,8 +131,8 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
         }
 
         _binding!!.bottomFragment.setOnClickListener {
-            var noteBottomSheetFragment = RecipeBottomSheetFragment.newInstance(recipeId)
-            noteBottomSheetFragment.show(requireActivity().supportFragmentManager, "Note Bottom Sheet Fragment")
+            noteBottomSheetFragment = RecipeBottomSheetFragment.newInstance(recipeId)
+            noteBottomSheetFragment!!.show(requireActivity().supportFragmentManager, "Note Bottom Sheet Fragment")
         }
 
         _binding!!.imgItem.setOnClickListener {
@@ -174,6 +177,7 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
             _binding!!.recipeType.text.isNullOrEmpty() -> {
                 Toast.makeText(context, "Recipe type is required", Toast.LENGTH_SHORT).show()
             }
+            // create new recipe type
             _binding!!.recipeType.text.toString() !in recipeTypesList!! -> {
                 val builder = AlertDialog.Builder(requireContext())
                 var newRecipeType = _binding!!.recipeType.text.toString()
@@ -282,6 +286,10 @@ class CreateRecipeFragment : BaseFragment(), EasyPermissions.PermissionCallbacks
 
                 "DeleteRecipe" -> {
                     deleteRecipe()
+                }
+
+                "CloseBottomFragment" -> {
+                    requireFragmentManager().beginTransaction().hide(noteBottomSheetFragment!!)
                 }
             }
         }

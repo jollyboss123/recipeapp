@@ -80,6 +80,7 @@ class HomeFragment : BaseFragment() {
         _binding!!.recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+        // to capture recipe type picked by user from dropdownlistfragment
         launch {
             context?.let {
                 var recipeTypes = RecipeDatabase.getDatabase(it).recipeDao().getAllCategory()
@@ -93,7 +94,7 @@ class HomeFragment : BaseFragment() {
                 recipeAdapter!!.setData(recipes)
                 _binding!!.recyclerView.adapter = recipeAdapter
 
-
+                // instantiate for query
                 arrRecipe = recipes as ArrayList<Recipes>
             }
         }
@@ -134,6 +135,7 @@ class HomeFragment : BaseFragment() {
         })
     }
 
+    // to capture user choice of recipe type in home fragment recipe type recycler view
     private fun getRecipeDataFromDb(recipeType: String) {
         _binding!!.tvRecipeType.text = recipeType
         launch {

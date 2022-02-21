@@ -330,10 +330,10 @@
 
         <ImageView
             android:id="@+id/imgMore"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_maximize"
+            android:src="@drawable/ic_baseline_arrow_drop_up_24"
             app:tint="@color/text" />
     </FrameLayout>
 

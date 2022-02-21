@@ -11,6 +11,7 @@
     tools:context=".MainActivity">
 
     <FrameLayout
+        android:id="@+id/bottom_fragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,10 +20,10 @@
 
         <ImageView
             android:id="@+id/imgMore"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_minimize"
+            android:src="@drawable/ic_baseline_arrow_drop_down_24"
             app:tint="@color/text" />
     </FrameLayout>
 

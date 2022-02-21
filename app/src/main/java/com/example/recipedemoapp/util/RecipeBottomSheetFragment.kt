@@ -118,5 +118,12 @@ class RecipeBottomSheetFragment : BottomSheetDialogFragment() {
             LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
             dismiss()
         }
+
+        _binding!!.bottomFragment.setOnClickListener {
+            val intent = Intent("bottom_sheet_action")
+            intent.putExtra("action", "CloseBottomFragment")
+            LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
+            dismiss()
+        }
     }
 }

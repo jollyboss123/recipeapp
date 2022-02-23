@@ -17,3 +17,4 @@ Ideas:
 6. customise alert box for create new cuisine type
 7. add lottie as custom progress bar and loader
 8. allow deleting cuisine type on long hold
+9. allow search across different cuisine types
